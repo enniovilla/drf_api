@@ -43,11 +43,14 @@ if 'DEV' not in os.environ:
         'rest_framework.renderers.JSONRenderer',
     ]
 
-REST_USE_JWT = True
-JWT_AUTH_SECURE = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
-JWT_AUTH_SAMESITE = 'None'
+REST_AUTH = {
+'USE_JWT': True,
+'JWT_AUTH_HTTPONLY': False,
+'JWT_AUTH_COOKIE': 'auth-token',
+'JWT_AUTH_REFRESH_COOKIE': 'refresh-token',
+'JWT_AUTH_SECURE': True,
+'JWT_AUTH_SAMESITE': 'None',
+}
 
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'drf_api.serializers.CurrentUserSerializer'
@@ -62,10 +65,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['8000-enniovilla-drfapi-encffk22ues.ws.codeinstitute-ide.net', os.environ.get('ALLOWED_HOST')]
+ALLOWED_HOSTS = ['8000-enniovilla-drfapi-azje5khh3li.ws.codeinstitute-ide.net', os.environ.get('ALLOWED_HOST')]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-enniovilla-drfapi-encffk22ues.ws.codeinstitute-ide.net', os.environ.get('ALLOWED_HOST')
+    '8000-enniovilla-drfapi-azje5khh3li.ws.codeinstitute-ide.net', os.environ.get('ALLOWED_HOST')
 ]
 
 # Application definition
@@ -110,14 +113,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if 'CLIENT_ORIGIN' in os.environ:
+if 'CLIENT_ORIGIN_DEV' in os.environ:
     CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN'),
         os.environ.get('CLIENT_ORIGIN_DEV')
     ]
 else:
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://.*\.codeinstitute-ide\.net$",
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
     ]
 
 CORS_ALLOW_CREDENTIALS = True

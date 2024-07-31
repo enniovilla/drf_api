@@ -65,7 +65,7 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = ['8000-enniovilla-drfapi-encffk22ues.ws.codeinstitute-ide.net', os.environ.get('ALLOWED_HOST')]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-enniovilla-drfapi-encffk22ues.ws.codeinstitute-ide.net',
+    'https://8000-enniovilla-drfapi-encffk22ues.ws.codeinstitute-ide.net', os.environ.get('ALLOWED_HOST')
 ]
 
 # Application definition
